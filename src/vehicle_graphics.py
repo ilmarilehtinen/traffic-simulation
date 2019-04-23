@@ -1,4 +1,6 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
+from vector import Vector
+
 
 
 class VehicleGraphics(QtWidgets.QGraphicsPolygonItem):
@@ -16,16 +18,10 @@ class VehicleGraphics(QtWidgets.QGraphicsPolygonItem):
     def drawCar(self):
 
         triangle = QtGui.QPolygonF()
-
         triangle.append(QtCore.QPointF(self.size/2, 0)) # Tip
-        triangle.append(QtCore.QPointF(0, self.size)) # Bottom-left
-        triangle.append(QtCore.QPointF(self.size, self.size)) # Bottom-right
+        triangle.append(QtCore.QPointF(3, self.size)) # Bottom-left
+        triangle.append(QtCore.QPointF(self.size - 3, self.size)) # Bottom-right
         triangle.append(QtCore.QPointF(self.size/2, 0)) # Tip
-
-        """triangle.append(QtCore.QPointF(self.size/2, 0))
-        triangle.append(QtCore.QpointF(0, self.size))
-        triangle.append(QtCore.QPointF(self.size, self.size))
-        triangle.append(QtCore.QpointF(self.size/2, 0))"""
 
         self.setPolygon(triangle)
         self.setTransformOriginPoint(self.size/2, self.size/2)
@@ -34,6 +30,11 @@ class VehicleGraphics(QtWidgets.QGraphicsPolygonItem):
 
         x = self.vehicle.location.x
         y = self.vehicle.location.y
+        QtWidgets.QGraphicsItem.setPos(self, x, y) #
 
-        QtWidgets.QGraphicsItem.setPos(self, x - 40, y - 30) #
+    def updateRotation(self):
+
+        direction = self.vehicle.direction
+        degrees = direction.getAngle()
+        QtWidgets.QGraphicsItem.setRotation(self, degrees + 90)
 

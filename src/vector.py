@@ -2,18 +2,32 @@
 import math, random
 
 class Vector:
+    """ Custom class to represent 2D vectors with x, y """
 
     def __init__(self, x, y):
         self.x = x
         self.y = y
 
     def norm(self):
+        """ Euclidian norm """
         return math.sqrt(self.x**2 + self.y**2)
 
     def distance(self, other):
         return (self - other).norm()
 
+    def getPerpendicular(self):
+        return Vector(self.y, -self.x)
+
+    def inCircle(self, circle, r):
+        """ Check if a Vector object is in a circle with radius r """
+
+        squareDistance = (circle.x - self.x)**2 + (circle.y - self.y)**2
+        if squareDistance < r**2:
+            return True
+
     def normalPoint(self, start, end):
+        """ Get the normal point from point(self) to line start-end """
+
         ab = end - start       
         ac = self - start       
 
@@ -21,6 +35,11 @@ class Vector:
         ab.mult(ab.dot(ac))
         normalPoint = start + ab
         return normalPoint
+
+    def getAngle(self):
+        rad = math.atan2(self.y, self.x)
+        deg = math.degrees(rad)
+        return deg
 
     def squareNorm(self):
         return self.x**2 + self.y**2
@@ -33,6 +52,10 @@ class Vector:
         else:
             self.x = self.x/norm
             self.y = self.y/norm
+
+    def setMagnitude(self, magnitude):
+        self.normalize()
+        self.mult(magnitude)
 
     def dot(self, other):
         return (self.x * other.x + self.y * other.y)
@@ -74,32 +97,3 @@ class Vector:
 
     def __str__(self):
         return "(%g, %g)" %(self.x, self.y)
-
-"""def main():
-    a = Vector(1,2)
-    b = Vector(3,2)
-    c = Vector(5,2)
-    d=a-a
-    print(a - b)
-    a1 = Vector(10, 20)
-    b1 = Vector(60, 80)
-    print(a1.distance(b1))
-    print((b1-a1).norm())
-    print(a-a)
-    d.normalize()
-    print(d.norm())
-    print(d)
-    theta = a.angle(b)
-    print(theta)
-
-    a.normalize()
-    print(a)
-    print(a.norm())
-    a.mult(8)
-    print(a)
-    a.limit(0.5)
-    print(a)
-
-    
-
-main()"""
