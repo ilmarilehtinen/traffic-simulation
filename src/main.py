@@ -72,7 +72,6 @@ if __name__ == "__main__":
     world = World(w, h, paths)
 
     for i in range(vehicleCount):
-        #randVect = v(random.randint(1, world.width-1), random.randint(1,world.heigth-1))
         world.addVehicle(Vehicle(paths[(i%len(paths))].start, vel, v0, 2, 25, 20, paths[i%len(paths)]))
         
     ex = GUI(world)

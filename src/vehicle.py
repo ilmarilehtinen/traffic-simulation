@@ -15,6 +15,8 @@ class Vehicle:
         self.path = path
 
     def seek(self, target):
+        """ Seek given target """
+        
         desired = target - self.location
         desired.setMagnitude(self.maxspeed)
         
@@ -22,16 +24,10 @@ class Vehicle:
         steer.limit(self.maxforce)
         return steer
 
-    """def flee(self, target):
-        desired = target - self.location
-        desired.setMagnitude(self.maxspeed)
-        steer = desired - self.velocity
-        steer.limit(self.maxforce)
-        invSteer = Vector(-steer.x, -steer.y)
-        return invSteer"""
-
-
+    
     def arrive(self, target):
+        """ Arrive smoothly to given target, velocity decreases linearly """
+
         desired = target - self.location
         distance = desired.norm()
         desired.setMagnitude(self.maxspeed)
@@ -48,12 +44,14 @@ class Vehicle:
 
     
     def followPath(self, path):
+        """ Follow the given path """
+
         target = self.velocity
         predict = self.velocity
         predict.setMagnitude(28)
         futureLocation = self.location + predict
 
-        highestDist = 1000000
+        highestDist = 1000000   #variable used to find the closest normalpoint in the whole path
         
         for i in range(len(path.points) - 1):
             a = path.points[i]
@@ -65,10 +63,8 @@ class Vehicle:
                 or normalPoint.y < min(a.y, b.y) or normalPoint.y > max(a.x, b.x):  #Check if normalpoint is in the line
                     normalPoint = b
                    
-                
-
             distance = futureLocation.distance(normalPoint)
-            #currDistance = self.location.distance(normalPoint)
+            
             if distance < highestDist:
                 highestDist = distance
                 direction = b-a
@@ -76,12 +72,14 @@ class Vehicle:
                 target = normalPoint
                 target = target + direction
         
-        if highestDist > path.radius: #or currDistance > path.radius:
+        if highestDist > path.radius:
             return self.seek(target)
         else:
             return Vector(0, 0)
 
     def separation(self, vehicles):
+        """ Separate vehicle from other nearby vehicles """
+
         separationDist = self.size * 1.5
         count = 0
         separationSum = Vector(0,0)
@@ -121,26 +119,10 @@ class Vehicle:
         steer.limit(self.maxforce)
         return steer
 
-    """def avoid(self, vehicles):
-        predict = self.velocity
-        predict.setMagnitude(40)
-        futureLocation = self.location + predict
-        target = self.velocity
-        
-
-        for vehicle in vehicles:
-            if futureLocation.inCircle(vehicle.location, 20):
-                offset = self.velocity.getPerpendicular()
-                offset.setMagnitude(10)
-                target = predict + offset
-                target.setMagnitude(self.maxspeed * 0.2)
-        steer = target - self.velocity
-        steer.limit(self.maxforce)
-        return steer
-            
-        return Vector(0,0)"""
+  
 
     def combineBehaviors(self, vehicles, path, *args):
+        """ Check for action and call the moving algorithms """
 
         if args[0] == "follow":
 
@@ -162,10 +144,7 @@ class Vehicle:
             self.acceleration += separation
             self.acceleration += seek
 
-        #self.applyForce(force)
-        #self.applyForce(brake)
 
-    
     def decideAction(self, path, target, vehicles):
 
         distance = self.location.distance(target)
@@ -177,8 +156,8 @@ class Vehicle:
             return self.followPath(path)
            
 
-
     def move(self):
+        """ Update vehicle parameters, aka "move" the vehicle """
 
         self.velocity = self.velocity + self.acceleration
         self.velocity.limit(self.maxspeed)
@@ -186,7 +165,5 @@ class Vehicle:
         self.direction = self.velocity
         self.acceleration.mult(0)
 
-    """def applyForce(self, force):
-        self.acceleration = self.acceleration + force"""
 
 

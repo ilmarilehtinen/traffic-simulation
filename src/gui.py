@@ -9,6 +9,7 @@ from PyQt5 import Qt, QtGui, QtCore, QtWidgets
 class GUI(QtWidgets.QMainWindow):
 
     def __init__(self, world):
+        """ Init needed variables """
 
         super().__init__()
         self.world = world
@@ -172,6 +173,7 @@ class GUI(QtWidgets.QMainWindow):
 
 
     def setMenus(self):
+        """ Sets menubar and adds filemenu """
 
         newAct = QtWidgets.QAction("New simulation", self)
         newAct.triggered.connect(self.start)
@@ -194,6 +196,8 @@ class GUI(QtWidgets.QMainWindow):
         fileMenu.addAction(exitAct)
 
     def setAction(self, i):
+        """ Decide action for vehicle movement """
+
         if i == 0:
             self.action = "follow"
         elif i == 1:
@@ -204,6 +208,7 @@ class GUI(QtWidgets.QMainWindow):
 
 
     def start(self):
+        """ Start the simulation """
 
         self.isPaused = False
         self.timer = QtCore.QBasicTimer()

@@ -4,6 +4,7 @@ from vector import Vector
 
 
 class VehicleGraphics(QtWidgets.QGraphicsPolygonItem):
+    """ Class to represent vehicle graphics in user interface """
 
     def __init__(self, vehicle, size):
         super(VehicleGraphics, self).__init__()
