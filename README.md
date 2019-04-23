@@ -1,19 +1,17 @@
-# Traffic simulation
+# Traffic simulation/Liikennesimulaatio
 
-1. Mit√§ ominaisuuksia olet jo toteuttanut projektiisi?
+## Projekti on yksinkertainen malli liikenteest‰, jossa autot kulkevat ennalta m‰‰r‰ttyj‰ reittej‰ pitkin ja yritt‰v‰t v‰ltt‰‰ tˆrm‰yksi‰ toisiin ajoneuvoihin jarruttamalla ja muuttamalla suuntavektoriaan sopivasti. Ohjelmassa on graafinen k‰yttˆliittym‰ jossa k‰ytt‰j‰ voi vaikuttaa simulaation kulkuun.
 
-Olen luonut suurimman osan tarvittavista luokista jo, kaipaavat kuitenkin paljon lis√§ominaisuuksia. Projektissa on alkukantainen graafinen k√§ytt√∂liittym√§. Yl√§laidassa on filemenu jostai voi valita muutaman eri toiminnon v√§lill√§. Voi aloittaa simulaation, pys√§ytt√§√§ sen ja sulkea ohjelman. Simulaation on toteuttu jo muutamia eri liikkumisalgoritmej√§ autoille esim seek ja arrive. Pathfollowing ei toimi viel√§ kunnolla. Eri algoritmin k√§ytt√∂ pit√§√§ viel√§ muuttaa itse koodista. Simulaation voi koodista luoda mielivaltaisen m√§√§r√§n autoja, jotka sitten piirtyv√§t ruudulle kolmioina. Autoille ei ole viel√§ m√§√§ritelty menosuuntaa eli kolmiot eiv√§t k√§√§nny viel√§.
+## Tiedosto- ja kansiorakenne
 
-2. K√§ytt√∂ohje
-
-Ohjelman voi ajaa, se k√§ynnistet√§√§n ajamalla "main.py" tiedosto. Itse simulaation voi aloittaa vasemmasta yl√§kulmasta. T√§ss√§ vaiheessa ruudulle piirtyy auto/autoja jotka seuraavat kursoria ruudulla. Vasemman yl√§kulman valikon "new simulation" ei viel√§ k√§ynnist√§ uutta simulaatiota vaan k√§yt√§n√∂ss√§ jatkaa samaa simulaatiota jos se on pausella. Jos haluaa uudet alkupaikat autoille, pit√§√§ main.py ajaa uudestaan. Autojen alkupaikat ovat siis satunnaisesti valittuja.
-
-
-3. Aikataulu
-
-Projektin aikataulu ei ole l√§htenyt aivan suunnitelmien mukaan k√§yntiin. Muiden kiireiden takia en ole kerennyt k√§ytt√§m√§√§n projektiin viel√§ tarpeeksi aikaa, mutta nyt seuraavilla viikoilla pit√§isi olla enemm√§n aikaa koodata projektia. Olen k√§ytt√§nyt ehk√§ 20-40h projektiin arviolta. Muuten eri kohtien arviot pit√§v√§t suhteellisen hyvin paikkansa
+  - doc-kansiosta lˆytyy kaikki projektiin liittyv‰t dokumentit
+  - src-kansiosta lˆytyy kaikki projektiin liittv‰t python-kooditiedostot.
 
 
-4. Muuta
+## Asennusohje
 
-Pit√§√§ katsoa riitt√§√§k√∂ aika tekem√§√§n esimerkiksi reitinhakualgoritmej√§. Muuten suunnitelmiin ei ole tullut hirve√§sti muutoksia.
+  - Ohjelma k‰ytt‰‰ PyQT5 grafiikkakirjastoa sek‰ pythonin sis‰isi‰ kirjastoja.
+
+## K‰yttˆohje
+
+  - Ohjelma ajetaan ajamalla main.py tiedosto. Graafinen k‰yttˆliittym‰ on suhteellisen yksiselitteinen. Oikeasta reunasta lˆytyy napit simulaation k‰ynnist‰miseen ja autojen lis‰‰miseen 
